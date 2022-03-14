@@ -26,8 +26,9 @@ const PostCard = ({ node }) => {
                <Image
                   src={author.photo.url}
                   alt={author.name}
-                  width={40}
-                  height={40}
+                  width={30}
+                  height={30}
+                  className="align-middle rounded-full"
                   objectPosition="center"
                   objectFit="cover"
                />
