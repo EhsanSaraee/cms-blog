@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { submitComment } from '../services';
 
-const CommentForm = () => {
+const CommentForm = ({ slug }) => {
    const [error, setError] = useState(false);
    const [localStorage, setLocalStorage] = useState(null);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -9,6 +10,11 @@ const CommentForm = () => {
    const nameElement = useRef();
    const emailElement = useRef();
    const storeDataElement = useRef();
+
+   useEffect(() => {
+      nameElement.current.value = window.localStorage.getItem('name');
+      emailElement.current.value = window.localStorage.getItem('email');
+   }, []);
 
    const handleCommentSubmission = () => {
       setError(false);
@@ -26,18 +32,26 @@ const CommentForm = () => {
       const commentObj = { comment, name, email, slug };
 
       if (storeData) {
-         localStorage.setItem('name', name);
-         localStorage.setItem('email', email);
+         window.localStorage.setItem('name', name);
+         window.localStorage.setItem('email', email);
       } else {
-         localStorage.removeItem('name', name);
-         localStorage.removeItem('email', email);
+         window.localStorage.removeItem('name', name);
+         window.localStorage.removeItem('email', email);
       }
+
+      submitComment(commentObj).then((res) => {
+         setShowSuccessMessage(true);
+
+         setTimeout(() => {
+            setShowSuccessMessage(false);
+         }, 3000);
+      });
    };
 
    return (
       <section className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">
          <h3 className="text-xl mb-8 pb-4 font-semibold border-b">
-            Comment Form
+            Leave a Reply
          </h3>
          <div className="grid grid-cols-1 gap-4 mb-4">
             <textarea
