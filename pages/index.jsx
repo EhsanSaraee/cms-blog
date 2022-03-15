@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Categories, PostCard, PostWidget } from '../components';
+import { FeaturedPosts } from '../sections';
 import { getPosts } from '../services';
 
 const Home = ({ posts }) => {
@@ -8,6 +9,7 @@ const Home = ({ posts }) => {
          <Head>
             <title>CMS Blog</title>
          </Head>
+         <FeaturedPosts />
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 col-span-1">
                {posts?.map((post) => (
