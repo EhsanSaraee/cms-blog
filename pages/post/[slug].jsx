@@ -1,9 +1,22 @@
-import { Author, CommentForm, Comments, PostDetail } from '../../components';
+import { useRouter } from 'next/router';
+import {
+   Author,
+   CommentForm,
+   Comments,
+   Loader,
+   PostDetail,
+} from '../../components';
 import Categories from '../../components/Categories';
 import PostWidget from '../../components/PostWidget';
 import { getPostDetails, getPosts } from '../../services';
 
 const PostDetails = ({ post }) => {
+   const router = useRouter();
+
+   if (router.isFallback) {
+      return <Loader />;
+   }
+
    return (
       <section className="container mx-auto px-10 mb-8">
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -44,6 +57,6 @@ export const getStaticPaths = async () => {
 
    return {
       paths: posts?.map(({ node: { slug } }) => ({ params: { slug } })),
-      fallback: false,
+      fallback: true,
    };
 };
