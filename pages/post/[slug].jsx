@@ -8,6 +8,7 @@ import {
 } from '../../components';
 import Categories from '../../components/Categories';
 import PostWidget from '../../components/PostWidget';
+import { AdjacentPosts } from '../../sections';
 import { getPostDetails, getPosts } from '../../services';
 
 const PostDetails = ({ post }) => {
@@ -23,6 +24,7 @@ const PostDetails = ({ post }) => {
             <div className="col-span-1 lg:col-span-8">
                <PostDetail post={post} />
                <Author author={post.author} />
+               <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
                <CommentForm slug={post.slug} />
                <Comments slug={post.slug} />
             </div>
