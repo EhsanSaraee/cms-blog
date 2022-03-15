@@ -2,8 +2,8 @@ import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const PostCard = ({ node }) => {
-   const { featuredImage, title, slug, author, createdAt, excerpt } = node;
+const PostCard = ({ post }) => {
+   const { featuredImage, title, slug, author, createdAt, excerpt } = post;
 
    return (
       <section className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
